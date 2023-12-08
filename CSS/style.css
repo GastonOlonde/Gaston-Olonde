@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
- * {
+* {
     margin : 0;
     padding: 0;
     box-sizing: border-box;
@@ -201,7 +201,7 @@
     gap: 2rem;
  }
  
- .Projets .projets-desc{
+ .Projets .projets-desc {
     flex: 1 1 30rem;
     background: var(--bg-color);
     padding: 3rem 2rem 4rem;
@@ -211,7 +211,7 @@
     transition: .5s ease;
  }
  
- .Projets .projets-desc:hover{
+ .Projets .projets-desc :hover{
     border-color: var(--main-color);
     transform: scale(1.02);
  }
@@ -237,6 +237,7 @@
  
  }
  
+
  .projet-item {
     flex: 1 1 30rem;
     background: var(--bg-color);
@@ -251,6 +252,10 @@
     font-size: 2.7rem;
  }
 
+ .Projets .Projets-container .projet-item :hover{
+    border-color: var(--main-color);
+    transform: scale(1.02);
+ }
  
 .Contact {
     background: var(--bg-color);

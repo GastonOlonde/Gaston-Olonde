@@ -3,30 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel ="stylesheet" href="../ProjetPerso/CSS/style.css"> 
+    <link rel ="stylesheet" href="./CSS/style.css"> 
+    <link rel ="stylesheet" href="./JS/libs/node_modules/notyf/notyf.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Gaston Olonde</title>
 </head>
 <body>
-    <?php
-    session_start();
-    include('../ProjetPerso/includes/header.php');
-    ?>
-
      <!-- home section design -->
      <section class="Accueil" id="Accueil">
         <div class="Accueil-content">
             <h3>Bonjour, c'est moi</h3>
             <h1>Gaston Olonde</h1>
             <h3>Et je suis un <span>Étudiant développeur</span></h3>
-            <p>Je suis étudiant en BUT à l'IUT d'Amiens, et j'entre dans ma deuxième année. 
+            <p>Je suis étudiant en BUT informatique à l'IUT d'Amiens, et j'entre dans ma deuxième année. 
             </p>
             <div class="social-media">
                 <a href="https://twitter.com/OlondeGaston" target="_blank"><i class='bx bxl-twitter' ></i></a>
                 <a href="https://www.instagram.com/o_gaston_/" target="_blank"><i class='bx bxl-instagram-alt' ></i></a>
                 <a href="https://www.linkedin.com/in/gaston-olonde-a90523263/" target="_blank"><i class='bx bxl-linkedin' ></i></a>
             </div>
-            <a href="file:///C:/Users/Gaston/Documents/Cv-OlondeGaston.pdf" target="_blank" class="btn" >Télécharger le CV</a>
+            <a href="./Assets/fichiers/Cv-OlondeGaston.pdf" target="_blank" class="btn" >Télécharger le CV</a>
         </div>
 
         <div class="Accueil-img">
@@ -42,7 +38,7 @@
         <div class="Apropos-content">
             <h3>À propos de <span>moi</span></h3>
             <h2>Étudiant Développeur web </h2>
-            <li>Je suis passionné de VTT depuis tout petit.</li>
+            <li>Je suis passionné de vélo.</li>
             <li>Je suis investi dans mon travail.</li>
             <li>Quand j'entreprends quelque chose j'essai d'aller jusqu'au bout.</li>
             <li>Je n'ai pas peur d'apprendre.</li>
@@ -64,7 +60,7 @@
                     sur des petites réalisations. 
 
                     Cette année je prévois de réaliser mon premier projet, qui est le site sur lequel vous êtes.
-                    Je voudrais aller jusqu'au bout en l'hébergeant, avec l'intégration bootstrap peut-être. 
+                    Je voudrais aller jusqu'au bout en l'hébergeant.
                     Mon projet suivant serai le projet de groupe SAE que l'on doit réaliser à l'iut. 
                     C'est un site internet complet de A à Z pour le CID ( centre des informaticiens dispersées).
                 </p>
@@ -94,22 +90,23 @@
     <section class="Contact" id="Contact">
         <h2 class="heading">Contactez <span>Moi !</span></h2>
         
-        <form action="../PHP/formulaire.php">
+        <form method="POST" action="./models/formulaire.php">
             <div class="input-box">
-                <input type="text" placeholder="Nom">
-                <input type="text" placeholder="Prénom">
+                <input name="nom" type="text" placeholder="Nom">
+                <input name="prenom" type="text" placeholder="Prénom">
             </div>
             <div class="input-box-l">
-                <input type="email" class="line" placeholder="Email">
+                <input name="email" type="email" class="line" placeholder="Email">
             </div>
             <div class="input-box">
-                <input type="number" placeholder="Téléphone">
-                <input type="text" placeholder="object">
+                <input name="tel" type="number" placeholder="Téléphone">
+                <input name="object" type="text" placeholder="object">
             </div>
-            <textarea name="" id="" cols="30" rows="10" placeholder="Votre Message" ></textarea>
+            <textarea name="message" id="" cols="30" rows="10" placeholder="Votre Message" ></textarea>
             <input type="submit" value="Envoyer le Message" class="btn">
         </form>
-
     </section>
+    <script src="./JS/libs/node_modules/notyf/notyf.min.js"></script>
+    <script src="./JS/notifs.js"></script>
 </body>
 </html>
