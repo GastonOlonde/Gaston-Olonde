@@ -28,7 +28,6 @@
         $contenu_message .= "Object: $object\n";
         $contenu_message .= "Message: $message\n";
 
-        echo $contenu_message;
 
         // Envoyer l'e-mail
         $destinataire = "gastonolonde@gmail.com";  // Adresse e-mail du destinataire
@@ -44,3 +43,4 @@
         exit;
     }
 ?>
+
