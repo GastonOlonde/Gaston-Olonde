@@ -1,6 +1,6 @@
 <?php
 
-require 'vendor/autoload.php';
+require './includes/flight-master/flight/autoload.php';
 
 
 Flight::route('/', function() {
