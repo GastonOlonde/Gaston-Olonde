@@ -1,8 +1,9 @@
 <?php
 
-require './includes/flight-master/flight/Flight.php';
+require './vendor/mikecao/flight/flight/Flight.php';
 
-require './includes/flight-master/flight/autoload.php';
+require './vendor/mikecao/flight/flight/autoload.php';
+
 
 
 session_start();
