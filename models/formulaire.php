@@ -21,12 +21,12 @@
         }
 
         // Construction du message
-        $contenu_message = "Prénom: $prenom\n";
-        $contenu_message .= "Nom: $nom\n";
-        $contenu_message .= "Email: $email\n";
-        $contenu_message .= "Téléphone: $tel\n";
-        $contenu_message .= "Object: $object\n";
-        $contenu_message .= "Message: $message\n";
+        $contenu_message = "$message\n";
+        $contenu_message .= "\n\n";
+        $contenu_message .= "$prenom ";
+        $contenu_message .= "$nom\n";
+        $contenu_message .= "$email\n";
+        $contenu_message .= "$tel\n";
 
 
         // Envoyer l'e-mail

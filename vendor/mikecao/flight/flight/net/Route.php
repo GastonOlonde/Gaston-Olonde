@@ -1,34 +1,34 @@
 <?php
 
 declare(strict_types=1);
-/**
- * Flight: An extensible micro-framework.
- *
- * @copyright Copyright (c) 2011, Mike Cao <mike@mikecao.com>
- * @license MIT, http://flightphp.com/license
+/*
+  Flight: An extensible micro-framework.
+ 
+  @copyright Copyright (c) 2011, Mike Cao <mike@mikecao.com>
+  @license MIT, http://flightphp.com/license
  */
 
 namespace flight\net;
 
-/**
- * The Route class is responsible for routing an HTTP request to
- * an assigned callback function. The Router tries to match the
- * requested URL against a series of URL patterns.
+/*
+  The Route class is responsible for routing an HTTP request to
+  an assigned callback function. The Router tries to match the
+  requested URL against a series of URL patterns.
  */
 final class Route
 {
-    /**
-     * @var string URL pattern
+    /*
+      @var string URL pattern
      */
     public string $pattern;
 
-    /**
-     * @var mixed Callback function
+    /*
+      @var mixed Callback function
      */
     public $callback;
 
-    /**
-     * @var array HTTP methods
+    /*
+      @var array HTTP methods
      */
     public array $methods = [];
 
