@@ -1,12 +1,12 @@
 <?php
 
 declare(strict_types=1);
-/**
- * Flight: An extensible micro-framework.
- *
- * @copyright Copyright (c) 2011, Mike Cao <mike@mikecao.com>
- * @license MIT, http://flightphp.com/license
- */
+/*
+Flight: An extensible micro-framework.
+
+@copyright Copyright (c) 2011, Mike Cao <mike@mikecao.com>
+@license MIT, http://flightphp.com/license
+*/
 
 namespace flight\core;
 
@@ -14,37 +14,37 @@ use Exception;
 use ReflectionClass;
 use ReflectionException;
 
-/**
- * The Loader class is responsible for loading objects. It maintains
- * a list of reusable class instances and can generate a new class
- * instances with custom initialization parameters. It also performs
- * class autoloading.
- */
+/*
+The Loader class is responsible for loading objects. It maintains
+a list of reusable class instances and can generate a new class
+instances with custom initialization parameters. It also performs
+class autoloading.
+*/
 class Loader
 {
-    /**
-     * Registered classes.
-     */
+    /*
+    Registered classes.
+    */
     protected array $classes = [];
 
-    /**
-     * Class instances.
-     */
+    /*
+    Class instances.
+    */
     protected array $instances = [];
 
-    /**
-     * Autoload directories.
-     */
+    /*
+    Autoload directories.
+    */
     protected static array $dirs = [];
 
-    /**
-     * Registers a class.
-     *
-     * @param string          $name     Registry name
-     * @param callable|string $class    Class name or function to instantiate class
-     * @param array           $params   Class initialization parameters
-     * @param callable|null   $callback $callback Function to call after object instantiation
-     */
+    /*
+    Registers a class.
+    
+    @param string          $name     Registry name
+    @param callable|string $class    Class name or function to instantiate class
+    @param array           $params   Class initialization parameters
+    @param callable|null   $callback $callback Function to call after object instantiation
+    */
     public function register(string $name, $class, array $params = [], ?callable $callback = null): void
     {
         unset($this->instances[$name]);
@@ -52,26 +52,26 @@ class Loader
         $this->classes[$name] = [$class, $params, $callback];
     }
 
-    /**
-     * Unregisters a class.
-     *
-     * @param string $name Registry name
-     */
+    /*
+    Unregisters a class.
+    
+    @param string $name Registry name
+    */
     public function unregister(string $name): void
     {
         unset($this->classes[$name]);
     }
 
-    /**
-     * Loads a registered class.
-     *
-     * @param string $name   Method name
-     * @param bool   $shared Shared instance
-     *
-     * @throws Exception
-     *
-     * @return object Class instance
-     */
+    /*
+    Loads a registered class.
+    
+    @param string $name   Method name
+    @param bool   $shared Shared instance
+    
+    @throws Exception
+    
+    @return object Class instance
+    */
     public function load(string $name, bool $shared = true): ?object
     {
         $obj = null;
@@ -102,28 +102,28 @@ class Loader
         return $obj;
     }
 
-    /**
-     * Gets a single instance of a class.
-     *
-     * @param string $name Instance name
-     *
-     * @return object Class instance
-     */
+    /*
+    Gets a single instance of a class.
+    
+    @param string $name Instance name
+     
+    @return object Class instance
+    */
     public function getInstance(string $name): ?object
     {
         return $this->instances[$name] ?? null;
     }
 
-    /**
-     * Gets a new instance of a class.
-     *
-     * @param callable|string $class  Class name or callback function to instantiate class
-     * @param array           $params Class initialization parameters
-     *
-     * @throws Exception
-     *
-     * @return object Class instance
-     */
+    /*
+    Gets a new instance of a class.
+    
+    @param callable|string $class  Class name or callback function to instantiate class
+    @param array           $params Class initialization parameters
+    
+    @throws Exception
+    
+    @return object Class instance
+    */
     public function newInstance($class, array $params = []): object
     {
         if (\is_callable($class)) {
@@ -154,19 +154,19 @@ class Loader
         }
     }
 
-    /**
-     * @param string $name Registry name
-     *
-     * @return mixed Class information or null if not registered
-     */
+    /*
+    @param string $name Registry name
+    
+    @return mixed Class information or null if not registered
+    */
     public function get(string $name)
     {
         return $this->classes[$name] ?? null;
     }
 
-    /**
-     * Resets the object to the initial state.
-     */
+    /*
+    Resets the object to the initial state.
+    */
     public function reset(): void
     {
         $this->classes = [];
@@ -175,12 +175,12 @@ class Loader
 
     // Autoloading Functions
 
-    /**
-     * Starts/stops autoloader.
-     *
-     * @param bool  $enabled Enable/disable autoloading
-     * @param mixed $dirs    Autoload directories
-     */
+    /*
+    Starts/stops autoloader.
+    
+    @param bool  $enabled Enable/disable autoloading
+    @param mixed $dirs    Autoload directories
+    */
     public static function autoload(bool $enabled = true, $dirs = []): void
     {
         if ($enabled) {
@@ -194,11 +194,11 @@ class Loader
         }
     }
 
-    /**
-     * Autoloads classes.
-     *
-     * @param string $class Class name
-     */
+    /*
+    Autoloads classes.
+    
+    @param string $class Class name
+    */
     public static function loadClass(string $class): void
     {
         $class_file = str_replace(['\\', '_'], '/', $class) . '.php';
@@ -213,11 +213,11 @@ class Loader
         }
     }
 
-    /**
-     * Adds a directory for autoloading classes.
-     *
-     * @param mixed $dir Directory path
-     */
+    /*
+    Adds a directory for autoloading classes.
+    
+    @param mixed $dir Directory path
+    */
     public static function addDirectory($dir): void
     {
         if (\is_array($dir) || \is_object($dir)) {

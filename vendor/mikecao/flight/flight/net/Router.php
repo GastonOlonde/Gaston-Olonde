@@ -1,61 +1,61 @@
 <?php
 
 declare(strict_types=1);
-/**
- * Flight: An extensible micro-framework.
- *
- * @copyright Copyright (c) 2011, Mike Cao <mike@mikecao.com>
- * @license MIT, http://flightphp.com/license
- */
+/*
+Flight: An extensible micro-framework.
+
+@copyright Copyright (c) 2011, Mike Cao <mike@mikecao.com>
+@license MIT, http://flightphp.com/license
+*/
 
 namespace flight\net;
 
-/**
- * The Router class is responsible for routing an HTTP request to
- * an assigned callback function. The Router tries to match the
- * requested URL against a series of URL patterns.
- */
+/*
+The Router class is responsible for routing an HTTP request to
+an assigned callback function. The Router tries to match the
+requested URL against a series of URL patterns.
+*/
 class Router
 {
-    /**
-     * Case sensitive matching.
-     */
+    /*
+    Case sensitive matching.
+    */
     public bool $case_sensitive = false;
-    /**
-     * Mapped routes.
-     */
+    /*
+    Mapped routes.
+    */
     protected array $routes = [];
 
-    /**
-     * Pointer to current route.
-     */
+    /*
+    Pointer to current route.
+    */
     protected int $index = 0;
 
-    /**
-     * Gets mapped routes.
-     *
-     * @return array Array of routes
-     */
+    /*
+    Gets mapped routes.
+    
+    @return array Array of routes
+    */
     public function getRoutes(): array
     {
         return $this->routes;
     }
 
-    /**
-     * Clears all routes in the router.
-     */
+    /*
+    Clears all routes in the router.
+    */
     public function clear(): void
     {
         $this->routes = [];
     }
 
-    /**
-     * Maps a URL pattern to a callback function.
-     *
-     * @param string   $pattern    URL pattern to match
-     * @param callback $callback   Callback function
-     * @param bool     $pass_route Pass the matching route object to the callback
-     */
+    /*
+    Maps a URL pattern to a callback function.
+    
+    @param string   $pattern    URL pattern to match
+    @param callback $callback   Callback function
+    @param bool     $pass_route Pass the matching route object to the callback
+    */
     public function map(string $pattern, callable $callback, bool $pass_route = false): void
     {
         $url = trim($pattern);
@@ -70,13 +70,13 @@ class Router
         $this->routes[] = new Route($url, $callback, $methods, $pass_route);
     }
 
-    /**
-     * Routes the current request.
-     *
-     * @param Request $request Request object
-     *
-     * @return bool|Route Matching route or false if no match
-     */
+    /*
+    Routes the current request.
+    
+    @param Request $request Request object
+    
+    @return bool|Route Matching route or false if no match
+    */
     public function route(Request $request)
     {
         $url_decoded = urldecode($request->url);
@@ -90,27 +90,27 @@ class Router
         return false;
     }
 
-    /**
-     * Gets the current route.
-     *
-     * @return bool|Route
-     */
+    /*
+    Gets the current route.
+    
+    @return bool|Route
+    */
     public function current()
     {
         return $this->routes[$this->index] ?? false;
     }
 
-    /**
-     * Gets the next route.
-     */
+    /*
+    Gets the next route.
+    */
     public function next(): void
     {
         $this->index++;
     }
 
-    /**
-     * Reset to the first route.
-     */
+    /*
+    Reset to the first route.
+    */
     public function reset(): void
     {
         $this->index = 0;

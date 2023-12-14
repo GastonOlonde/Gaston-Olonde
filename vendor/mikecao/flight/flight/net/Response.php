@@ -1,32 +1,32 @@
 <?php
 
 declare(strict_types=1);
-/**
- * Flight: An extensible micro-framework.
- *
- * @copyright Copyright (c) 2011, Mike Cao <mike@mikecao.com>
- * @license MIT, http://flightphp.com/license
- */
+/*
+Flight: An extensible micro-framework.
+
+@copyright Copyright (c) 2011, Mike Cao <mike@mikecao.com>
+@license MIT, http://flightphp.com/license
+*/
 
 namespace flight\net;
 
 use Exception;
 
-/**
- * The Response class represents an HTTP response. The object
- * contains the response headers, HTTP status code, and response
- * body.
- */
+/*
+The Response class represents an HTTP response. The object
+contains the response headers, HTTP status code, and response
+body.
+*/
 class Response
 {
-    /**
-     * header Content-Length.
-     */
+    /*
+    header Content-Length.
+    */
     public bool $content_length = true;
 
-    /**
-     * @var array HTTP status codes
-     */
+    /*
+    @var array HTTP status codes
+    */
     public static array $codes = [
         100 => 'Continue',
         101 => 'Switching Protocols',
@@ -97,35 +97,35 @@ class Response
         510 => 'Not Extended',
         511 => 'Network Authentication Required',
     ];
-    /**
-     * @var int HTTP status
-     */
+    /*
+    @var int HTTP status
+    */
     protected int $status = 200;
 
-    /**
-     * @var array HTTP headers
-     */
+    /*
+    @var array HTTP headers
+    */
     protected array $headers = [];
 
-    /**
-     * @var string HTTP response body
-     */
+    /*
+    @var string HTTP response body
+    */
     protected string $body = '';
 
-    /**
-     * @var bool HTTP response sent
-     */
+    /*
+    @var bool HTTP response sent
+    */
     protected bool $sent = false;
 
-    /**
-     * Sets the HTTP status of the response.
-     *
-     * @param int|null $code HTTP status code.
-     *
-     * @throws Exception If invalid status code
-     *
-     * @return int|object Self reference
-     */
+    /*
+    Sets the HTTP status of the response.
+
+    @param int|null $code HTTP status code.
+    
+    @throws Exception If invalid status code
+    
+    @return int|object Self reference
+    */
     public function status(?int $code = null)
     {
         if (null === $code) {
@@ -141,14 +141,14 @@ class Response
         return $this;
     }
 
-    /**
-     * Adds a header to the response.
-     *
-     * @param array|string $name  Header name or array of names and values
-     * @param string|null  $value Header value
-     *
-     * @return object Self reference
-     */
+    /*
+    Adds a header to the response.
+    
+    @param array|string $name  Header name or array of names and values
+    @param string|null  $value Header value
+    
+    @return object Self reference
+    */
     public function header($name, ?string $value = null)
     {
         if (\is_array($name)) {
@@ -162,23 +162,23 @@ class Response
         return $this;
     }
 
-    /**
-     * Returns the headers from the response.
-     *
-     * @return array
-     */
+    /*
+    Returns the headers from the response.
+    
+    @return array
+    */
     public function headers()
     {
         return $this->headers;
     }
 
-    /**
-     * Writes content to the response body.
-     *
-     * @param string $str Response content
-     *
-     * @return Response Self reference
-     */
+    /*
+    Writes content to the response body.
+    
+    @param string $str Response content
+    
+    @return Response Self reference
+    */
     public function write(string $str): self
     {
         $this->body .= $str;
@@ -186,11 +186,11 @@ class Response
         return $this;
     }
 
-    /**
-     * Clears the response.
-     *
-     * @return Response Self reference
-     */
+    /*
+    Clears the response.
+    
+    @return Response Self reference
+    */
     public function clear(): self
     {
         $this->status = 200;
@@ -200,13 +200,13 @@ class Response
         return $this;
     }
 
-    /**
-     * Sets caching headers for the response.
-     *
-     * @param int|string $expires Expiration time
-     *
-     * @return Response Self reference
-     */
+    /*
+    Sets caching headers for the response.
+    
+    @param int|string $expires Expiration time
+    
+    @return Response Self reference
+    */
     public function cache($expires): self
     {
         if (false === $expires) {
@@ -229,11 +229,11 @@ class Response
         return $this;
     }
 
-    /**
-     * Sends HTTP headers.
-     *
-     * @return Response Self reference
-     */
+    /*
+    Sends HTTP headers.
+    
+    @return Response Self reference
+    */
     public function sendHeaders(): self
     {
         // Send status code header
@@ -281,11 +281,11 @@ class Response
         return $this;
     }
 
-    /**
-     * Gets the content length.
-     *
-     * @return int Content length
-     */
+    /*
+    Gets the content length.
+    
+    @return int Content length
+    */
     public function getContentLength(): int
     {
         return \extension_loaded('mbstring') ?
@@ -293,17 +293,17 @@ class Response
             \strlen($this->body);
     }
 
-    /**
-     * Gets whether response was sent.
-     */
+    /*
+    Gets whether response was sent.
+    */
     public function sent(): bool
     {
         return $this->sent;
     }
 
-    /**
-     * Sends a HTTP response.
-     */
+    /*
+    Sends a HTTP response.
+    */
     public function send(): void
     {
         if (ob_get_length() > 0) {

@@ -1,46 +1,46 @@
 <?php
 
 declare(strict_types=1);
-/**
- * Flight: An extensible micro-framework.
- *
- * @copyright Copyright (c) 2011, Mike Cao <mike@mikecao.com>
- * @license MIT, http://flightphp.com/license
- */
+/*
+Flight: An extensible micro-framework.
+
+@copyright Copyright (c) 2011, Mike Cao <mike@mikecao.com>
+@license MIT, http://flightphp.com/license
+*/
 
 namespace flight\core;
 
 use Exception;
 use InvalidArgumentException;
 
-/**
- * The Dispatcher class is responsible for dispatching events. Events
- * are simply aliases for class methods or functions. The Dispatcher
- * allows you to hook other functions to an event that can modify the
- * input parameters and/or the output.
- */
+/*
+The Dispatcher class is responsible for dispatching events. Events
+are simply aliases for class methods or functions. The Dispatcher
+allows you to hook other functions to an event that can modify the
+input parameters and/or the output.
+*/
 class Dispatcher
 {
-    /**
-     * Mapped events.
-     */
+    /*
+    Mapped events.
+    */
     protected array $events = [];
 
-    /**
-     * Method filters.
-     */
+    /*
+    Method filters.
+    */
     protected array $filters = [];
 
-    /**
-     * Dispatches an event.
-     *
-     * @param string $name   Event name
-     * @param array  $params Callback parameters
-     *
-     *@throws Exception
-     *
-     * @return mixed|null Output of callback
-     */
+    /*
+    Dispatches an event.
+
+    @param string $name   Event name
+    @param array  $params Callback parameters
+    
+    @throws Exception
+    
+    @return mixed|null Output of callback
+    */
     final public function run(string $name, array $params = [])
     {
         $output = '';
@@ -61,47 +61,47 @@ class Dispatcher
         return $output;
     }
 
-    /**
-     * Assigns a callback to an event.
-     *
-     * @param string   $name     Event name
-     * @param callback $callback Callback function
-     */
+    /*
+    Assigns a callback to an event.
+    
+    @param string   $name     Event name
+    @param callback $callback Callback function
+    */
     final public function set(string $name, callable $callback): void
     {
         $this->events[$name] = $callback;
     }
 
-    /**
-     * Gets an assigned callback.
-     *
-     * @param string $name Event name
-     *
-     * @return callback $callback Callback function
-     */
+    /*
+    Gets an assigned callback.
+    
+    @param string $name Event name
+    
+    @return callback $callback Callback function
+    */
     final public function get(string $name): ?callable
     {
         return $this->events[$name] ?? null;
     }
 
-    /**
-     * Checks if an event has been set.
-     *
-     * @param string $name Event name
-     *
-     * @return bool Event status
-     */
+    /*
+    Checks if an event has been set.
+    
+     @param string $name Event name
+    
+    @return bool Event status
+    */
     final public function has(string $name): bool
     {
         return isset($this->events[$name]);
     }
 
-    /**
-     * Clears an event. If no name is given,
-     * all events are removed.
-     *
-     * @param string|null $name Event name
-     */
+    /*
+    Clears an event. If no name is given,
+    all events are removed.
+    
+    @param string|null $name Event name
+    */
     final public function clear(?string $name = null): void
     {
         if (null !== $name) {
@@ -113,27 +113,27 @@ class Dispatcher
         }
     }
 
-    /**
-     * Hooks a callback to an event.
-     *
-     * @param string   $name     Event name
-     * @param string   $type     Filter type
-     * @param callback $callback Callback function
-     */
+    /*
+    Hooks a callback to an event.
+    
+    @param string   $name     Event name
+    @param string   $type     Filter type
+    @param callback $callback Callback function
+    */
     final public function hook(string $name, string $type, callable $callback): void
     {
         $this->filters[$name][$type][] = $callback;
     }
 
-    /**
-     * Executes a chain of method filters.
-     *
-     * @param array $filters Chain of filters
-     * @param array $params  Method parameters
-     * @param mixed $output  Method output
-     *
-     * @throws Exception
-     */
+    /*
+    Executes a chain of method filters.
+    
+    @param array $filters Chain of filters
+    @param array $params  Method parameters
+    @param mixed $output  Method output
+    
+    @throws Exception
+    */
     final public function filter(array $filters, array &$params, &$output): void
     {
         $args = [&$params, &$output];
@@ -145,16 +145,16 @@ class Dispatcher
         }
     }
 
-    /**
-     * Executes a callback function.
-     *
-     * @param array|callback $callback Callback function
-     * @param array          $params   Function parameters
-     *
-     *@throws Exception
-     *
-     * @return mixed Function results
-     */
+    /*
+    Executes a callback function.
+
+    @param array|callback $callback Callback function
+    @param array          $params   Function parameters
+    
+    @throws Exception
+    
+    @return mixed Function results
+    */
     public static function execute($callback, array &$params = [])
     {
         if (\is_callable($callback)) {
@@ -166,14 +166,14 @@ class Dispatcher
         throw new InvalidArgumentException('Invalid callback specified.');
     }
 
-    /**
-     * Calls a function.
-     *
-     * @param callable|string $func   Name of function to call
-     * @param array           $params Function parameters
-     *
-     * @return mixed Function results
-     */
+    /*
+    Calls a function.
+    
+    @param callable|string $func   Name of function to call
+    @param array           $params Function parameters
+    
+    @return mixed Function results
+    */
     public static function callFunction($func, array &$params = [])
     {
         // Call static method
@@ -199,14 +199,14 @@ class Dispatcher
         }
     }
 
-    /**
-     * Invokes a method.
-     *
-     * @param mixed $func   Class method
-     * @param array $params Class method parameters
-     *
-     * @return mixed Function results
-     */
+    /*
+    Invokes a method.
+    
+    @param mixed $func   Class method
+    @param array $params Class method parameters
+    
+    @return mixed Function results
+    */
     public static function invokeMethod($func, array &$params = [])
     {
         [$class, $method] = $func;
@@ -243,9 +243,9 @@ class Dispatcher
         }
     }
 
-    /**
-     * Resets the object to the initial state.
-     */
+    /*
+    Resets the object to the initial state.
+    */
     final public function reset(): void
     {
         $this->events = [];
